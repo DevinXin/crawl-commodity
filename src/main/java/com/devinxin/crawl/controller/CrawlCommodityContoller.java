@@ -36,12 +36,9 @@ public class CrawlCommodityContoller {
         JSONObject jbRes = new JSONObject();
         try {
             document = Jsoup.connect(url).header("cookie",cookie).get();
-            Element element = document.getElementById("detail");
-            Elements elements = element.select("script");
+            Elements elements = document.getElementById("detail").select("script");
             List<Element> elementsList = elements.stream().filter(e->e.toString().contains("TShop.poc")).collect(Collectors.toList());
-            Element elementScript = elementsList.get(0);
-            String elementScriptData = elementScript.data();
-            String data = elementScriptData.split("TShop.Setup\\(")[1].trim().split("\\);")[0].trim();
+            String data = elementsList.get(0).data().split("TShop.Setup\\(")[1].trim().split("\\);")[0].trim();
             JSONObject jb = JSONObject.parseObject(data);
             String descUrl = "https:"+jb.getJSONObject("api").getString("httpsDescUrl");
             result = HttpClientUtil.doGetWithCookie(descUrl,cookie);
