@@ -1,4 +1,4 @@
-package com.devinxin.crawl.Controller;
+package com.devinxin.crawl.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.devinxin.crawl.utils.HttpClientUtil;
